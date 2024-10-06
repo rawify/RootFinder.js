@@ -1,0 +1,55 @@
+{
+  "name": "rootfinder",
+  "title": "RootFinder.js",
+  "version": "0.0.1",
+  "homepage": "https://raw.org/book/algebra/solving-cubic-equations/",
+  "bugs": "https://github.com/rawify/RootFinder.js/issues",
+  "description": "A root finder library for quadratic and cubic polynomials",
+  "keywords": [
+    "math",
+    "root",
+    "cubic",
+    "quadratic"
+  ],
+  "private": false,
+  "main": "./dist/rootfinder.js",
+  "module": "./dist/rootfinder.mjs",
+  "types": "./rootfinder.d.ts",
+  "browser": "./dist/rootfinder.min.js",
+  "unpkg": "./dist/rootfinder.min.js",
+  "readmeFilename": "README.md",
+  "exports": {
+    ".": {
+      "types": "./rootfinder.d.ts",
+      "require": "./dist/rootfinder.js",
+      "import": "./dist/rootfinder.mjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rawify/RootFinder.js.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/rawify"
+  },
+  "author": {
+    "name": "Robert Eisele",
+    "email": "robert@raw.org",
+    "url": "https://raw.org/"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "crude-build RootFinder"
+  },
+  "devDependencies": {
+    "crude-build": "^0.0.3"
+  },
+  "dependencies": {
+    "complex.js": "^2.2.1"
+  }
+}
