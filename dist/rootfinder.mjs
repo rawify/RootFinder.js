@@ -85,5 +85,5 @@ const RootFinder = {
 
 };
 export {
-  RootFinder as default
+  RootFinder as default, RootFinder
 };
