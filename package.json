@@ -47,9 +47,9 @@
     "build": "crude-build RootFinder"
   },
   "devDependencies": {
-    "crude-build": "^0.0.4"
+    "crude-build": "^0.1.1"
   },
   "dependencies": {
-    "complex.js": "^2.2.3"
+    "complex.js": "^2.2.5"
   }
 }

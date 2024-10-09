@@ -1,12 +1,12 @@
 /**
- * @license RootFinder.js v0.0.1 10/6/2024
+ * @license RootFinder.js v0.0.1 10/9/2024
  * https://raw.org/book/algebra/solving-cubic-equations/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)
  * Licensed under the MIT license.
  **/
 
-/* import Complex from complex.js */
+import Complex from 'complex.js';
 
 const omega = Complex(-0.5, Math.sqrt(3) / 2); // Cube root of unity
 
