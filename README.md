@@ -67,7 +67,7 @@ console.log(complexRoots); // Output: [ Complex { re: 1, im: 0 }, Complex { re: 
 
 ## API
 
-### `quadratic(a, b, c)`
+### `quadratic(a, b, c[, returnReal=false])`
 
 Solves the quadratic equation `ax² + bx + c = 0`.
 
@@ -75,10 +75,11 @@ Solves the quadratic equation `ax² + bx + c = 0`.
   - `a` (Number): Coefficient of `x²`
   - `b` (Number): Coefficient of `x`
   - `c` (Number): Constant term
+  - `returnReal` (optional Boolean): Decide if only real roots should be returned
 
 - **Returns**: An array of roots, which can contain real or complex numbers.
 
-### `cubic(a, b, c, d)`
+### `cubic(a, b, c, d[, returnReal=false])`
 
 Solves the cubic equation `ax³ + bx² + cx + d = 0` using Cardano's method.
 
@@ -87,6 +88,7 @@ Solves the cubic equation `ax³ + bx² + cx + d = 0` using Cardano's method.
   - `b` (Number): Coefficient of `x²`
   - `c` (Number): Coefficient of `x`
   - `d` (Number): Constant term
+  - `returnReal` (optional Boolean): Decide if only real roots should be returned
 
 - **Returns**: An array of roots, which can contain real or complex numbers.
 

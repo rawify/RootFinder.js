@@ -43,13 +43,14 @@
     "node": "*"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/*.js",
     "build": "crude-build RootFinder"
   },
   "devDependencies": {
-    "crude-build": "^0.1.1"
+    "crude-build": "^0.1.2",
+    "mocha": "^10.8.1"
   },
   "dependencies": {
-    "complex.js": "^2.2.5"
+    "complex.js": "^2.4.0"
   }
 }

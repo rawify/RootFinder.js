@@ -3,86 +3,132 @@ import Complex from 'complex.js';
 
 
 
-const omega = Complex(-0.5, Math.sqrt(3) / 2); // Cube root of unity
-
 const RootFinder = {
 
-    "quadratic": (a, b, c) => {
+    "quadratic": function (a, b, c, realOnly = false) {
 
-        let D = b * b - 4 * a * c;
-
-        let aa = 2 * a;
-        let mb = -b;
-
-        if (D > 0) {
-            let sqrt = Math.sqrt(D);
-            return [
-                Complex({ "re": (mb + sqrt) / aa, "im": 0 }),
-                Complex({ "re": (mb - sqrt) / aa, "im": 0 })
-            ];
-        } else if (D < 0) {
-            let sqrt = Math.sqrt(-D);
-            return [
-                Complex({ "re": mb / aa, "im": sqrt / aa }),
-                Complex({ "re": mb / aa, "im": - sqrt / aa })
-            ];
+        const roots = [];
+        if (Math.abs(a) < 1e-14) {
+            if (Math.abs(b) > 1e-14) {
+                // Linear solution
+                const x = -c / b;
+                if (realOnly) {
+                    roots.push(x);
+                } else {
+                    roots.push(Complex(x));
+                }
+            }
         } else {
-            return [
-                Complex({ "re": mb / aa, "im": 0 })
-            ];
+            const D = b * b - 4 * a * c;
+            if (Math.abs(D) < 1e-14) {
+                const x = -b / (2 * a);
+                roots.push(realOnly ? x : Complex(x));
+            } else if (D > 0) {
+                const sqrtD = Math.sqrt(D);
+                const x1 = (-b + sqrtD) / (2 * a);
+                const x2 = (-b - sqrtD) / (2 * a);
+                if (realOnly) {
+                    roots.push(x1, x2);
+                } else {
+                    roots.push(Complex(x1), Complex(x2));
+                }
+            } else if (!realOnly) {
+                const re = -b / (2 * a);
+                const im = Math.sqrt(-D) / (2 * a);
+                roots.push(
+                    Complex(re, im),
+                    Complex(re, -im)
+                );
+            }
         }
+        return roots;
     },
 
-    "cubic": (a, b, c, d) => {
+    "cubic": function (a, b, c, d, realOnly = false) {
 
         if (a === 0) {
-            return RootFinder['quadratic'](b, c, d);
+            return RootFinder['quadratic'](b, c, d, realOnly);
         }
 
         if (d === 0) {
-            return [Complex(0), ...RootFinder['quadratic'](a, b, c)];
+            if (realOnly) {
+                return [0, ...RootFinder['quadratic'](a, b, c, realOnly)];
+            } else {
+                return [Complex(0), ...RootFinder['quadratic'](a, b, c, realOnly)];
+            }
         }
 
-        b = b / a;
-        c = c / a;
-        d = d / a;
+        // Normalize coefficients
+        const denom = a;
+        a = b / denom;
+        b = c / denom;
+        c = d / denom;
 
-        const delta0 = Complex(b * b - 3 * c, 1e-16);
-        const delta1 = Complex(2 * b * b * b - 9 * b * c + 27 * d, 1e-16);
+        // Depressed cubic coefficients
+        const roots = [];
+        const p = b - a * a / 3;
+        const q = (2 * a * a * a) / 27 - (a * b) / 3 + c;
+        const D = (q / 2) ** 2 + (p / 3) ** 3;
 
-        const discriminant = Complex(delta1['re'] * delta1['re'] - 4 * delta0['re'] * delta0['re'] * delta0['re']);
+        if (Math.abs(D) < 1e-14) {
 
-        const C = delta1['add'](discriminant['sqrt']())['div'](2)['pow'](1 / 3);
+            if (Math.abs(q) < 1e-14) {
+                // Triple root
+                if (realOnly) {
+                    roots.push(-a / 3);
+                } else {
+                    roots.push(Complex(-a / 3));
+                }
+            } else {
+                // One single and one double root
+                const u = Math.cbrt(-q / 2);
+                const t1 = 2 * u - a / 3;
+                const t2 = -u - a / 3;
+                if (realOnly) {
+                    roots.push(t1, t2);
+                } else {
+                    roots.push(Complex(t1), Complex(t2));
+                }
+            }
+        } else if (D > 0) {
+            // One real root and two complex conjugate roots
+            const sqrtD = Math.sqrt(D);
+            const u = Math.cbrt(-q / 2 + sqrtD);
+            const v = Math.cbrt(-q / 2 - sqrtD);
+            const t = u + v;
+            const realRoot = t - a / 3;
 
-        return [
-            C['add'](delta0['div'](C))['neg']()['div'](3)['sub'](b / 3),
-            C['mul'](omega)['add'](delta0['div'](C['mul'](omega)))['neg']()['div'](3)['sub'](b / 3),
-            C['mul'](omega['conjugate']())['add'](delta0['div'](C['mul'](omega['conjugate']())))['neg']()['div'](3)['sub'](b / 3)
-        ];
+            if (realOnly) {
+                roots.push(realRoot);
+            } else {
+                // Real root
+                roots.push(Complex(realRoot));
 
-        /*
-        // Cardano’s Method
-
-        // Make a depressed cubic of the form x^3 + px + q = 0
-        let p = (3 * a * c - b * b) / (3 * a * a);
-        let q = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
-
-        // Calculate cube roots of complex numbers
-        let D = Complex(Math.pow(q / 2, 2) + Math.pow(p / 3, 3));
-        let sqrtD = D.sqrt();
-        let u = Complex(-q / 2).add(sqrtD).pow(1 / 3);
-        let v = Complex(-q / 2).sub(sqrtD).pow(1 / 3);
-
-        // Calculate the roots in t
-        let t1 = u.add(v);
-        let t2 = v.mul(omega.conjugate()).add(u.mul(omega));
-        let t3 = u.mul(omega.conjugate()).add(v.mul(omega));
-
-        // Transform back to the original variable x
-        let shift = -b / (3 * a);
-        return [t1.add(shift), t2.add(shift), t3.add(shift)];*/
+                // Complex conjugate roots
+                const realPart = -0.5 * (u + v) - a / 3;
+                const imaginaryPart = (Math.sqrt(3) / 2) * (u - v);
+                roots.push(
+                    Complex(realPart, imaginaryPart),
+                    Complex(realPart, -imaginaryPart)
+                );
+            }
+        } else {
+            // Three real roots
+            const r = Math.sqrt(-p / 3);
+            const phi = Math.acos(-q / (2 * r ** 3));
+            for (let k = 0; k < 3; k++) {
+                const angle = (phi + 2 * Math.PI * k) / 3;
+                const t = 2 * r * Math.cos(angle);
+                const x = t - a / 3;
+                if (realOnly) {
+                    roots.push(x);
+                } else {
+                    roots.push(Complex(x));
+                }
+            }
+        }
+        return roots;
     }
-
 };
 export {
   RootFinder as default, RootFinder
