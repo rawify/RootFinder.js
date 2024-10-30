@@ -1,6 +1,6 @@
 # RootFinder.js
 
-[![NPM Package](https://img.shields.io/npm/v/rootfinder.svg?style=flat)](https://npmjs.org/package/bitset "View this project on npm")
+[![NPM Package](https://img.shields.io/npm/v/rootfinder.svg?style=flat)](https://npmjs.org/package/rootfinder "View this project on npm")
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 **RootFinder.js** is a lightweight JavaScript library for finding the roots of [quadratic equations](https://raw.org/book/algebra/solving-quadratic-equations/) and [cubic equations](https://raw.org/book/algebra/solving-cubic-equations/). It leverages the **[Complex.js](https://github.com/rawify/Complex.js)** library to handle complex solutions, ensuring precision and correctness when dealing with both real and complex numbers.
