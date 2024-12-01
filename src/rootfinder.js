@@ -1,5 +1,5 @@
 /**
- * @license RootFinder.js v0.0.1 10/30/2024
+ * @license RootFinder.js v0.0.1 12/1/2024
  * https://raw.org/book/algebra/solving-cubic-equations/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)
@@ -56,11 +56,9 @@ const RootFinder = {
         }
 
         if (d === 0) {
-            if (realOnly) {
-                return [0, ...RootFinder['quadratic'](a, b, c, realOnly)];
-            } else {
-                return [Complex(0), ...RootFinder['quadratic'](a, b, c, realOnly)];
-            }
+            let tmp = RootFinder['quadratic'](a, b, c, realOnly);
+            tmp.unshift(realOnly ? 0 : Complex(0));
+            return tmp;
         }
 
         // Normalize coefficients
