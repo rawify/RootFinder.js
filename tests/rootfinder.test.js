@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 const Complex = require('complex.js');
-const RootFinder = require('rootfinder');
+const RootFinder = require('@rawify/rootfinder');
 
 const solveCubic = RootFinder.cubic;
 

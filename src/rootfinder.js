@@ -1,5 +1,5 @@
 /**
- * @license RootFinder.js v0.0.1 3/24/2025
+ * @license RootFinder.js v0.0.2 3/24/2025
  * https://raw.org/book/algebra/solving-cubic-equations/
  *
  * Copyright (c) 2025, Robert Eisele (https://raw.org/)
