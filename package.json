@@ -1,7 +1,7 @@
 {
   "name": "@rawify/rootfinder",
   "title": "RootFinder.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://raw.org/book/algebra/solving-cubic-equations/",
   "bugs": "https://github.com/rawify/RootFinder.js/issues",
   "description": "A root finder library for quadratic and cubic polynomials",

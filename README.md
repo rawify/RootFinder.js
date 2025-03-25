@@ -16,7 +16,7 @@
 You can install `RootFinder.js` via npm:
 
 ```bash
-npm install rootfinder
+npm install @rawify/rootfinder
 ```
 
 ## Usage
@@ -24,13 +24,13 @@ npm install rootfinder
 Import the library into your JavaScript or Node.js project:
 
 ```javascript
-const RootFinder = require('rootfinder');
+const RootFinder = require('@rawify/rootfinder');
 ```
 
 or 
 
 ```javascript
-import RootFinder from 'rootfinder';
+import RootFinder from '@rawify/rootfinder';
 ```
 
 ### Solving Quadratic Equations
