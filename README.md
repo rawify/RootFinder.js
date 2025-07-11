@@ -19,9 +19,32 @@ You can install `RootFinder.js` via npm:
 npm install @rawify/rootfinder
 ```
 
+Or with yarn:
+
+```bash
+yarn add @rawify/rootfinder
+```
+
+Alternatively, download or clone the repository:
+
+```bash
+git clone https://github.com/rawify/RootFinder.js
+```
+
 ## Usage
 
-Import the library into your JavaScript or Node.js project:
+Include the `rootfinder.min.js` file in your project:
+
+```html
+<script src="path/to/rootfinder.min.js"></script>
+<script src="path/to/complex.min.js"></script>
+<script>
+  const roots = RootFinder.quadratic(2, 5, 6);
+  ...
+</script>
+```
+
+Or in a Node.js project:
 
 ```javascript
 const RootFinder = require('@rawify/rootfinder');
