@@ -1,10 +1,10 @@
 {
   "name": "@rawify/rootfinder",
   "title": "RootFinder.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
+  "description": "The RAW root finder library for quadratic and cubic polynomials",
   "homepage": "https://raw.org/book/algebra/solving-cubic-equations/",
   "bugs": "https://github.com/rawify/RootFinder.js/issues",
-  "description": "The RAW root finder library for quadratic and cubic polynomials",
   "keywords": [
     "math",
     "root",
@@ -14,17 +14,38 @@
   "private": false,
   "main": "./dist/rootfinder.js",
   "module": "./dist/rootfinder.mjs",
-  "types": "./rootfinder.d.ts",
   "browser": "./dist/rootfinder.min.js",
   "unpkg": "./dist/rootfinder.min.js",
-  "readmeFilename": "README.md",
+  "types": "./rootfinder.d.ts",
   "exports": {
     ".": {
-      "types": "./rootfinder.d.ts",
-      "require": "./dist/rootfinder.js",
-      "import": "./dist/rootfinder.mjs"
+      "import": {
+        "types": "./rootfinder.d.mts",
+        "default": "./dist/rootfinder.mjs"
+      },
+      "require": {
+        "types": "./rootfinder.d.ts",
+        "default": "./dist/rootfinder.js"
+      },
+      "browser": {
+        "types": "./rootfinder.d.ts",
+        "default": "./dist/rootfinder.min.js"
+      },
+      "default": {
+        "types": "./rootfinder.d.ts",
+        "default": "./dist/rootfinder.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "<4.7": {
+      "*": [
+        "rootfinder.d.ts"
+      ]
     }
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git@github.com:rawify/RootFinder.js.git"
@@ -48,7 +69,7 @@
   },
   "devDependencies": {
     "crude-build": "^0.1.2",
-    "mocha": "^11.1.0"
+    "mocha": "^11.7.1"
   },
   "dependencies": {
     "complex.js": "^2.4.2"

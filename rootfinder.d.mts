@@ -8,4 +8,4 @@ export class RootFinder {
     static cubic(a: number, b: number, c: number, d: number): Complex[];
 }
 
-export = RootFinder;
+export default RootFinder;
